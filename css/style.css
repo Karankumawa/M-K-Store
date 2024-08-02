@@ -1,3 +1,10 @@
+*{
+  box-sizing: border-box;
+}
+section {
+  display: -webkit-flex;
+  display: flex;
+}
 
 body {
   background-color: cadetblue;
@@ -69,4 +76,8 @@ body {
     float: right;
     background-color: #cc0000;
     color: white;
+  }
+  p.h11{
+    font-size: 50px;
+    
   }
