@@ -1,13 +1,7 @@
-*{
-  box-sizing: border-box;
-}
-section {
-  display: -webkit-flex;
-  display: flex;
-}
+
 
 body {
-  background-color: cadetblue;
+  background-color: rgb(254, 255, 255);
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
   }
@@ -81,3 +75,33 @@ body {
     font-size: 50px;
     
   }
+
+
+  .parent-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .child-container {
+    width: 100%;
+    max-width: 350px;
+    min-height: 300px;
+    background: rgb(192, 202, 212);
+    }
+
+  .header-container{
+    max-width: 100%;
+    background-color: #901b7a;
+    align-items: center;
+
+  }
+  .header-container-one{
+    max-width: 100%;
+    background-color: #e5a8da;
+    align-items: center;
+
+  }
+
