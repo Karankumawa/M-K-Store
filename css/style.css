@@ -1,4 +1,9 @@
 
+p.h11{
+  font-size: 50px;
+  border-radius: 40px;
+  text-align: center;
+}
 
 body {
   background-color: rgb(254, 255, 255);
@@ -7,7 +12,10 @@ body {
   }
   .topnav {
     overflow: hidden;
-    background-color: #333;
+    background-color: #727272;
+    height: 50px;
+    background-origin: padding-box;
+    border-radius: 40px;
   }
   
   .topnav a {
@@ -29,6 +37,7 @@ body {
     border-bottom: 2px solid #262626;
     letter-spacing: 2px;
     transition: .5s;
+    border-radius: 40px;
   }
   
   .topnav a:hover {
@@ -68,13 +77,10 @@ body {
   }
   .topnav a.split {
     float: right;
-    background-color: #cc0000;
+    background-color: #c66b6b;
     color: white;
   }
-  p.h11{
-    font-size: 50px;
-    
-  }
+ 
 
 
   .parent-container {
@@ -90,13 +96,18 @@ body {
     max-width: 350px;
     min-height: 300px;
     background: rgb(192, 202, 212);
+    border-radius: 30px;
+
+    font-display: none;
+    font-size: medium;
+    align-content: center;
     }
 
   .header-container{
     max-width: 100%;
     background-color: #901b7a;
     align-items: center;
-
+    border-radius: 30px;
   }
   .header-container-one{
     max-width: 100%;
@@ -105,3 +116,4 @@ body {
 
   }
 
+  
