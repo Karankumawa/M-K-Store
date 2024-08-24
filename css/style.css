@@ -34,6 +34,27 @@ nav a {
   color: #333;
 }
 
+.search-bar {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.search-bar input {
+  border: none;
+  padding: 5px;
+  width: 100%;
+}
+
+.search-bar button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
+
 .hero {
   background-image: url("assests/wallpaper.jpg"); /* Replace with your hero image */
   background-size: cover;
@@ -126,25 +147,11 @@ footer {
   text-align: center;
 }
 
-
-
-.search-bar {
-  display: flex;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.search-bar input {
-  border: none;
-  padding: 5px;
-  width: 100%;
-}
-
-.search-bar button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  cursor: pointer;
+.hero-child{
+  background-size: cover;
+  background-color: #ffbcbc;
+  text-align: center;
+  background-position: center;
+  padding: 10rem 0;
+  background-image: url("assests/wallpaper.jpg");
 }
