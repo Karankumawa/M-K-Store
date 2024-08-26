@@ -1,104 +1,155 @@
-body {
-  font-family: Arial, sans-serif;
+/* Reset some default styles */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Header and navigation styling */
 header {
-  background-color: #f0f0f0;
-  padding: 1rem 0;
-  text-align: center;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
 }
 
 nav {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
+  justify-content: space-between;
 }
 
-nav ul {
-  list-style: none;
+.logo h1 {
   margin: 0;
-  padding: 0;
-  display: flex;
-}
-
-nav li {
-  margin-left: 20px;
-}
-
-nav a {
-  text-decoration: none;
-  color: #333;
 }
 
 .search-bar {
   display: flex;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .search-bar input {
-  border: none;
   padding: 5px;
-  width: 100%;
+  border: none;
+  border-radius: 5px 0 0 5px;
 }
 
 .search-bar button {
-  background-color: #4CAF50;
-  color: white;
   padding: 5px 10px;
   border: none;
+  border-radius: 0 5px 5px 0;
+  background-color: #555;
+  color: #fff;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 24px;
   cursor: pointer;
 }
 
+.nav-links {
+  list-style-type: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ddd;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+  .nav-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      text-align: center;
+      background-color: #333;
+      position: absolute;
+      top: 60px;
+      left: 0;
+  }
+
+  .nav-links li {
+      margin: 10px 0;
+  }
+
+  .menu-toggle {
+      display: block;
+  }
+
+  .nav-links.show {
+      display: flex;
+  }
+}
+
+/* Hero section styling */
 .hero {
-  background-image: url("assests/wallpaper.jpg"); /* Replace with your hero image */
-  background-size: cover;
-  background-position: center;
-  padding: 10rem 0;
-  text-align: center;
-}
-
-.hero-content {
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 2rem;
-  border-radius: 5px;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-.slideshow {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  margin: 0 auto;
-  background-color: #f5f6f7;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  margin: auto;
 }
 
 .slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   display: none;
-}
-
-.slide.active {
-  display: block;
 }
 
 .slide img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
 }
 
+/* Navigation arrows */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 18px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background-color: rgba(0,0,0,0.5);
+}
 
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* Fade animation */
+.fade {
+  animation: fade 1.5s ease-in-out;
+}
+
+@keyframes fade {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+
+/* Featured products section */
 .featured-products {
   padding: 5rem 0;
 }
@@ -140,18 +191,37 @@ nav a {
   border-radius: 5px;
 }
 
-footer {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem 0;
+/* Hero-1 section styling */
+.hero-1 {
+  background-image: url("assests/wallpaper.jpg");
+  background-size: cover;
+  background-position: center;
+  padding: 10rem 0;
   text-align: center;
 }
 
-.hero-child{
+.hero-content {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem;
+  border-radius: 5px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Hero-child section styling */
+.hero-child {
   background-size: cover;
   background-color: #ffbcbc;
   text-align: center;
   background-position: center;
   padding: 10rem 0;
   background-image: url("assests/wallpaper.jpg");
+}
+
+/* Footer styling */
+footer {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 0;
+  text-align: center;
 }
