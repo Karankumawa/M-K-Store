@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-signin-client_id" content="YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com">
     <title>Login and Sign Up</title>
-    <link rel="stylesheet" href="css/loginstyle.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap">
+    <link rel="stylesheet" href="css/loginstyle.css">
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth.js"></script>
 </head>
 <body>
     <main>
         <section class="login-section">
             <div class="container">
                 <div class="row">
+                    <!-- Login Form -->
                     <div class="col-md-6">
                         <form id="login-form" class="login-form">
                             <h2>Login</h2>
@@ -27,6 +32,8 @@
                             <button type="button" onclick="submitLoginForm()">Login</button>
                         </form>
                     </div>
+
+                    <!-- Sign Up Form -->
                     <div class="col-md-6">
                         <form id="signup-form" class="signup-form">
                             <h2>Sign Up</h2>
@@ -42,8 +49,10 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="separator"></div>
-                
+
+                <!-- Google Sign-In Button -->
                 <div class="g-signin2" data-onsuccess="onSignIn"></div>
             </div>
         </section>
@@ -51,5 +60,22 @@
 
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="js/loginjs.js"></script>
+    
+    <!-- Firebase Config -->
+    <script>
+        // Your Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDM8ljwNFw9NaIgNvF4By40hWR9vi7hyis",
+            authDomain: "m-k-store-b0fc9.firebaseapp.com",
+            projectId: "m-k-store-b0fc9",
+            storageBucket: "m-k-store-b0fc9.appspot.com",
+            messagingSenderId: "49898832804",
+            appId: "1:49898832804:web:abcdefg12345"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    </script>
 </body>
 </html>
