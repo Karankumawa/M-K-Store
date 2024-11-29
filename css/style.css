@@ -181,7 +181,14 @@ nav {
   color: #007bff;
   margin-bottom: 1rem;
 }
-
+button{
+  display: inline-block;
+  padding: 0.8rem 1.5rem;
+  background-color: #007bff;
+  color: #fcf8f8;
+  text-decoration: none;
+  border-radius: 5px;
+}
 .btn {
   display: inline-block;
   padding: 0.8rem 1.5rem;

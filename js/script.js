@@ -1,3 +1,16 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", () => {
+          const product = JSON.parse(button.getAttribute("data-product"));
+          cart.push(product);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(`${product.name} added to cart!`);
+      });
+  });
+});
+
 document.querySelector('.menu-toggle').addEventListener('click', function() {
   document.querySelector('.nav-links').classList.toggle('show');
 });

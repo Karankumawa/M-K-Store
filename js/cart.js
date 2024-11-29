@@ -1,70 +1,46 @@
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-    document.querySelector('.nav-links').classList.toggle('show');
-  });
+document.addEventListener("DOMContentLoaded", () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-// Cart array to store products
-let cart = [];
+    function updateCart() {
+        const cartItems = document.querySelector(".cart-items");
+        cartItems.innerHTML = "";
+        let subtotal = 0;
 
-// Function to add product to cart
-function addToCart(product) {
-    cart.push(product);
-    updateCart();
-}
+        cart.forEach((product, index) => {
+            const cartItem = document.createElement("div");
+            cartItem.classList.add("cart-item");
+            cartItem.innerHTML = `
+                <img src="${product.image}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <span class="price">$${product.price}</span>
+                <button class="remove-btn" data-index="${index}">Remove</button>
+            `;
+            cartItems.appendChild(cartItem);
+            subtotal += product.price;
+        });
 
-// Function to update cart display
-function updateCart() {
-    const cartItems = document.querySelector('.cart-items');
-    cartItems.innerHTML = '';
-    let subtotal = 0;
-    cart.forEach((product) => {
-        const cartItem = document.createElement('div');
-        cartItem.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.description}</p>
-            <span class="price">${product.price}</span>
-            <button class="remove-btn">Remove</button>
-        `;
-        cartItems.appendChild(cartItem);
-        subtotal += product.price;
-    });
-    document.getElementById('subtotal').innerText = `$${subtotal.toFixed(2)}`;
-}
-
-// Function to remove product from cart
-function removeProduct(product) {
-    const index = cart.indexOf(product);
-    if (index > -1) {
-        cart.splice(index, 1);
-        updateCart();
+        document.getElementById("subtotal").innerText = `$${subtotal.toFixed(2)}`;
+        localStorage.setItem("cart", JSON.stringify(cart));
     }
-}
 
-// Add event listeners to cart buttons
-document.addEventListener('DOMContentLoaded', () => {
-    const cartButtons = document.querySelectorAll('.btn.add-to-cart');
-    cartButtons.forEach((button) => {
-        button.addEventListener('click', (e) => {
-            const product = {
-                image: e.target.parentNode.querySelector('img').src,
-                name: e.target.parentNode.querySelector('h3').innerText,
-                description: e.target.parentNode.querySelector('p').innerText,
-                price: parseFloat(e.target.parentNode.querySelector('span.price').innerText.replace('$', '')),
-            };
-            addToCart(product);
-        });
+    document.querySelector(".cart-items").addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-btn")) {
+            const index = e.target.getAttribute("data-index");
+            cart.splice(index, 1);
+            updateCart();
+        }
     });
 
-    const removeButtons = document.querySelectorAll('.remove-btn');
-    removeButtons.forEach((button) => {
-        button.addEventListener('click', (e) => {
-            const product = {
-                image: e.target.parentNode.querySelector('img').src,
-                name: e.target.parentNode.querySelector('h3').innerText,
-                description: e.target.parentNode.querySelector('p').innerText,
-                price: parseFloat(e.target.parentNode.querySelector('span.price').innerText.replace('$', '')),
-            };
-            removeProduct(product);
-        });
+    document.getElementById("checkout-btn").addEventListener("click", () => {
+        const address = document.getElementById("address").value;
+        if (cart.length && address) {
+            alert(`Order placed! Total: ${document.getElementById("subtotal").innerText}, Shipping to: ${address}`);
+            cart = [];
+            updateCart();
+        } else {
+            alert("Please add items to cart and enter an address.");
+        }
     });
+
+    updateCart();
 });
