@@ -44,3 +44,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateCart();
 });
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("php/getProducts.php")
+        .then((response) => response.json())
+        .then((products) => {
+            const productGrid = document.querySelector(".product-grid");
+            productGrid.innerHTML = "";
+            products.forEach((product) => {
+                const productItem = document.createElement("div");
+                productItem.classList.add("product");
+                productItem.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <span class="price">$${product.price}</span>
+                    <button class="add-to-cart" 
+                        data-product='${JSON.stringify(product)}'>Add to Cart</button>
+                `;
+                productGrid.appendChild(productItem);
+            });
+        })
+        .catch((error) => console.error("Error loading products:", error));
+});
