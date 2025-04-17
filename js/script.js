@@ -1,39 +1,93 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+// Main functionality
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize cart from localStorage
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    
+    // Add to cart functionality
+    const addToCartButtons = document.querySelectorAll('.add-to-cart');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productData = JSON.parse(this.dataset.product);
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Check if product already exists in cart
+            const existingProduct = cart.find(item => item.name === productData.name);
+            if (existingProduct) {
+                existingProduct.quantity = (existingProduct.quantity || 1) + 1;
+            } else {
+                productData.quantity = 1;
+                cart.push(productData);
+            }
+            
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Show notification
+            showNotification('Product added to cart!');
+        });
+    });
 
-  document.querySelectorAll(".add-to-cart").forEach(button => {
-      button.addEventListener("click", () => {
-          const product = JSON.parse(button.getAttribute("data-product"));
-          cart.push(product);
-          localStorage.setItem("cart", JSON.stringify(cart));
-          alert(`${product.name} added to cart!`);
-      });
-  });
+    // Update cart count in header
+    function updateCartCount() {
+        const cartCount = document.querySelector('.cart-count');
+        if (cartCount) {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems > 0 ? `(${totalItems})` : '';
+            cartCount.style.display = totalItems > 0 ? 'inline' : 'none';
+        }
+    }
+
+    // Show notification
+    function showNotification(message) {
+        const notification = document.createElement('div');
+        notification.className = 'notification';
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add('show');
+        }, 100);
+        
+        setTimeout(() => {
+            notification.classList.remove('show');
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+
+    // Initialize cart count on page load
+    updateCartCount();
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.nav-links') && !event.target.closest('.menu-toggle')) {
+            navLinks.classList.remove('active');
+            menuToggle.classList.remove('active');
+        }
+    });
+
+    // Search functionality
+    const searchInput = document.getElementById('search-input');
+    const searchButton = document.getElementById('search-button');
+    
+    if (searchButton) {
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value.trim();
+            if (searchTerm) {
+                window.location.href = `shop.html?search=${encodeURIComponent(searchTerm)}`;
+            }
+        });
+    }
 });
-
-document.querySelector('.menu-toggle').addEventListener('click', function() {
-  document.querySelector('.nav-links').classList.toggle('show');
-});
-
-let slideIndex = 0;
-
-function showSlides() {
-  let slides = document.getElementsByClassName("slide");
-  for (let i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) { slideIndex = 1 }
-  slides[slideIndex - 1].style.display = "block";
-  setTimeout(showSlides, 3000); // Change slide every 3 seconds
-}
-
-function plusSlides(n) {
-  slideIndex += n;
-  if (slideIndex > document.getElementsByClassName("slide").length) { slideIndex = 1 }
-  if (slideIndex < 1) { slideIndex = document.getElementsByClassName("slide").length }
-  showSlides();
-}
-
-// Initialize slideshow
-showSlides();

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Shop - M.K. Store</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <img src="assests/M.K Store logo.png" alt="M.K. Store Logo">
+                <h1>M.K. Store</h1>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Search...">
+                <button id="search-button">Search</button>
+            </div>
+            <div class="menu-toggle">
+                <i class="fa fa-bars"></i>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html" class="active">Shop</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="cart.html">Cart <span class="cart-count"></span></a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="shop-container">
+            <button class="filter-toggle">
+                <i class="fa fa-filter"></i> Filters
+            </button>
+            
+            <aside class="filters">
+                <div class="close-filters">
+                    <i class="fa fa-times"></i>
+                </div>
+                <div class="filter-section">
+                    <h3>Categories</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="checkbox" id="category1" name="category" value="daily-items">
+                            <label for="category1">Daily Items</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="category2" name="category" value="snacks">
+                            <label for="category2">Snacks</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="category3" name="category" value="beverages">
+                            <label for="category3">Beverages</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="checkbox" id="category4" name="category" value="personal-care">
+                            <label for="category4">Personal Care</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Price Range</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="radio" id="price1" name="price" value="0-2">
+                            <label for="price1">$0 - $2</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" id="price2" name="price" value="2-4">
+                            <label for="price2">$2 - $4</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" id="price3" name="price" value="4-6">
+                            <label for="price3">$4 - $6</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" id="price4" name="price" value="6+">
+                            <label for="price4">$6+</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Rating</h3>
+                    <div class="filter-options">
+                        <div class="filter-option">
+                            <input type="radio" id="rating1" name="rating" value="5">
+                            <label for="rating1">5 Stars</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" id="rating2" name="rating" value="4+">
+                            <label for="rating2">4+ Stars</label>
+                        </div>
+                        <div class="filter-option">
+                            <input type="radio" id="rating3" name="rating" value="3+">
+                            <label for="rating3">3+ Stars</label>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="shop-content">
+                <div class="shop-header">
+                    <h1>Our Products</h1>
+                    <div class="sort-options">
+                        <label for="sort">Sort by:</label>
+                        <select id="sort">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Rating</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-grid">
+                    <!-- Products will be dynamically added here -->
+                </div>
+
+                <div class="pagination">
+                    <button class="page-btn" data-page="1">1</button>
+                    <button class="page-btn" data-page="2">2</button>
+                    <button class="page-btn" data-page="3">3</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>M.K. Store is your one-stop shop for all your daily needs. We provide quality products at affordable prices.</p>
+                <a href="about.html">Learn More</a>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>Email: info@mkstore.com</p>
+                <p>Phone: +1 234 567 890</p>
+                <p>Address: 123 Store Street, City, Country</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 M.K. Store. All rights reserved.</p>
+            <p>Contact: 63...</p>
+            <p>Name: Karan Kumawat</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/shop.js"></script>
+</body>
+</html> 
