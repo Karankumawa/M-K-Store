@@ -86,11 +86,54 @@
                             <label for="message">Message</label>
                             <textarea id="message" name="message" required></textarea>
                         </div>
-                        <button type="submit" class="btn">Send Message</button>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <div id="form-success" style="display:none;color:green;margin-top:1rem;text-align:center;">Thank you for contacting us! We'll get back to you soon.</div>
                     </form>
+                    <div class="social-links" style="margin-top:2rem;text-align:center;">
+                        <a href="https://wa.me/1234567890" target="_blank" title="WhatsApp" style="margin:0 10px;"><i class="fa fa-whatsapp" style="color:#25D366;font-size:1.8rem;"></i></a>
+                        <a href="mailto:info@mkstore.com" title="Email" style="margin:0 10px;"><i class="fa fa-envelope" style="color:#007bff;font-size:1.8rem;"></i></a>
+                        <a href="https://facebook.com/" target="_blank" title="Facebook" style="margin:0 10px;"><i class="fa fa-facebook" style="color:#4267B2;font-size:1.8rem;"></i></a>
+                        <a href="https://instagram.com/" target="_blank" title="Instagram" style="margin:0 10px;"><i class="fa fa-instagram" style="color:#C13584;font-size:1.8rem;"></i></a>
+                    </div>
                 </div>
             </div>
         </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">How can I track my order?</button>
+                <div class="faq-answer">You can track your order status from your account dashboard or by contacting our support team.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">What payment methods do you accept?</button>
+                <div class="faq-answer">We accept credit/debit cards, UPI, net banking, and cash on delivery.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">How do I return a product?</button>
+                <div class="faq-answer">Contact us within 7 days of delivery to initiate a return. Our team will guide you through the process.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question" aria-expanded="false">Can I change my delivery address?</button>
+                <div class="faq-answer">Yes, you can update your delivery address before your order is shipped by contacting our support.</div>
+            </div>
+        </section>
+
+        <!-- Live Chat/Help Widget -->
+        <div id="live-chat">
+            <button id="chat-toggle" aria-label="Open chat"><i class="fa fa-comments"></i></button>
+            <div id="chat-box">
+                <div class="chat-header">Live Help</div>
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-bot-msg">Hi! How can we help you today? Please leave your message and our team will respond as soon as possible.</div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="Type your message...">
+                    <button id="chat-send">Send</button>
+                </div>
+            </div>
+        </div>
 
         <section class="map-section">
             <div class="container">
@@ -133,5 +176,74 @@
     </footer>
 
     <script src="js/script.js"></script>
+    <script>
+    // Contact form validation and success message
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        var name = document.getElementById('name').value.trim();
+        var email = document.getElementById('email').value.trim();
+        var subject = document.getElementById('subject').value.trim();
+        var message = document.getElementById('message').value.trim();
+        if(name && email && subject && message) {
+            document.getElementById('form-success').style.display = 'block';
+            this.reset();
+        }
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-question').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            var answer = this.nextElementSibling;
+            var expanded = this.getAttribute('aria-expanded') === 'true';
+            document.querySelectorAll('.faq-question').forEach(function(b) { b.setAttribute('aria-expanded', 'false'); });
+            document.querySelectorAll('.faq-answer').forEach(function(a) { a.style.display = 'none'; });
+            if (!expanded) {
+                answer.style.display = 'block';
+                this.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+    document.querySelectorAll('.faq-answer').forEach(function(a) { a.style.display = 'none'; });
+
+    // Live chat widget with simple bot
+    var chatToggle = document.getElementById('chat-toggle');
+    var chatBox = document.getElementById('chat-box');
+    var chatMessages = document.getElementById('chat-messages');
+    var chatInput = document.getElementById('chat-input');
+    var chatSend = document.getElementById('chat-send');
+    chatToggle.addEventListener('click', function() {
+        chatBox.style.display = chatBox.style.display === 'block' ? 'none' : 'block';
+        if(chatBox.style.display === 'block') chatInput.focus();
+    });
+    chatSend.addEventListener('click', sendChatMessage);
+    chatInput.addEventListener('keydown', function(e) { if(e.key === 'Enter') sendChatMessage(); });
+    function sendChatMessage() {
+        var msg = chatInput.value.trim();
+        if(msg) {
+            var userMsg = document.createElement('div');
+            userMsg.className = 'chat-user-msg';
+            userMsg.textContent = msg;
+            chatMessages.appendChild(userMsg);
+            chatInput.value = '';
+            setTimeout(function() {
+                var botMsg = document.createElement('div');
+                botMsg.className = 'chat-bot-msg';
+                botMsg.textContent = getBotReply(msg);
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 800);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+    }
+    function getBotReply(msg) {
+        msg = msg.toLowerCase();
+        if(msg.includes('order')) return 'You can track your order from your account dashboard or contact support.';
+        if(msg.includes('payment')) return 'We accept cards, UPI, net banking, and cash on delivery.';
+        if(msg.includes('return')) return 'To return a product, contact us within 7 days of delivery.';
+        if(msg.includes('address')) return 'You can update your address before shipping by contacting support.';
+        if(msg.includes('hello') || msg.includes('hi')) return 'Hello! How can I assist you today?';
+        return 'Thank you for your message! Our team will respond soon.';
+    }
+    </script>
 </body>
 </html> 
