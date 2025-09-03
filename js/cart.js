@@ -27,10 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 cartItem.className = 'cart-item';
                 cartItem.innerHTML = `
                     <img src="${item.image}" alt="${item.name}" class="item-image">
-                    <div class="item-details">
-                        <h3 class="item-title">${item.name}</h3>
-                        <p class="item-price">$${item.price}</p>
-                        <div class="item-quantity">
+                    <div class="cart-item-details">
+                        <div class="cart-item-title">${item.name}</div>
+                        <div class="cart-item-price">$${item.price}</div>
+                        <div class="quantity-control">
                             <button class="quantity-btn minus" data-index="${index}">-</button>
                             <input type="number" class="quantity-input" value="${item.quantity}" min="1">
                             <button class="quantity-btn plus" data-index="${index}">+</button>
@@ -64,12 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             // Add event listeners for quantity inputs
-            document.querySelectorAll('.quantity-input').forEach(input => {
+            document.querySelectorAll('.quantity-input').forEach((input, idx) => {
                 input.addEventListener('change', function() {
-                    const index = this.parentElement.querySelector('.minus').dataset.index;
                     const newQuantity = parseInt(this.value);
                     if (newQuantity > 0) {
-                        cart[index].quantity = newQuantity;
+                        cart[idx].quantity = newQuantity;
                         localStorage.setItem('cart', JSON.stringify(cart));
                         updateCartSummary();
                         updateCartCount();
@@ -81,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Update quantity
     function updateQuantity(index, change) {
+        index = parseInt(index);
         cart[index].quantity += change;
         if (cart[index].quantity < 1) {
             cart[index].quantity = 1;
@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Remove item from cart
     function removeItem(index) {
+        index = parseInt(index);
         cart.splice(index, 1);
         localStorage.setItem('cart', JSON.stringify(cart));
         displayCartItems();
@@ -103,12 +104,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update cart summary
     function updateCartSummary() {
         const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-        const shipping = subtotal > 50 ? 0 : 5;
+        const shipping = subtotal > 50 ? 0 : (subtotal === 0 ? 0 : 5);
         const total = subtotal + shipping;
 
-        const subtotalElement = document.querySelector('.summary-row:nth-child(1) span:last-child');
-        const shippingElement = document.querySelector('.summary-row:nth-child(2) span:last-child');
-        const totalElement = document.querySelector('.total-row span:last-child');
+        const subtotalElement = document.querySelector('.subtotal');
+        const shippingElement = document.querySelector('.shipping');
+        const totalElement = document.querySelector('.total-amount');
 
         if (subtotalElement) subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
         if (shippingElement) shippingElement.textContent = shipping === 0 ? 'Free' : `$${shipping.toFixed(2)}`;
@@ -129,72 +130,4 @@ document.addEventListener('DOMContentLoaded', function() {
     displayCartItems();
     updateCartSummary();
     updateCartCount();
-});
-
-// Add to cart functionality
-const addToCartButtons = document.querySelectorAll('.add-to-cart');
-addToCartButtons.forEach(button => {
-    button.addEventListener('click', function() {
-        const product = JSON.parse(this.dataset.product);
-        addToCart(product);
-        updateCartCount();
-        showNotification('Product added to cart!');
-    });
-});
-
-// Add product to cart
-function addToCart(product) {
-    const existingItem = cart.find(item => item.name === product.name);
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({
-            name: product.name,
-            price: product.price,
-            image: product.image,
-            quantity: 1
-        });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-// Show notification
-function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            document.body.removeChild(notification);
-        }, 300);
-    }, 3000);
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("php/getProducts.php")
-        .then((response) => response.json())
-        .then((products) => {
-            const productGrid = document.querySelector(".product-grid");
-            productGrid.innerHTML = "";
-            products.forEach((product) => {
-                const productItem = document.createElement("div");
-                productItem.classList.add("product");
-                productItem.innerHTML = `
-                    <img src="${product.image}" alt="${product.name}">
-                    <h3>${product.name}</h3>
-                    <span class="price">$${product.price}</span>
-                    <button class="add-to-cart" 
-                        data-product='${JSON.stringify(product)}'>Add to Cart</button>
-                `;
-                productGrid.appendChild(productItem);
-            });
-        })
-        .catch((error) => console.error("Error loading products:", error));
 });

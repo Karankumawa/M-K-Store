@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (cartCount) {
             const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
             cartCount.textContent = totalItems > 0 ? `(${totalItems})` : '';
-            cartCount.style.display = totalItems > 0 ? 'inline' : 'none';
+            cartCount.style.display = totalItems > 0 ? 'inline-flex' : 'none';
         }
     }
 
@@ -81,13 +81,35 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search functionality
     const searchInput = document.getElementById('search-input');
     const searchButton = document.getElementById('search-button');
+
+    const performSearch = () => {
+        const searchTerm = (searchInput?.value || '').trim();
+        if (searchTerm) {
+            window.location.href = `shop.html?search=${encodeURIComponent(searchTerm)}`;
+        }
+    };
     
     if (searchButton) {
-        searchButton.addEventListener('click', function() {
-            const searchTerm = searchInput.value.trim();
-            if (searchTerm) {
-                window.location.href = `shop.html?search=${encodeURIComponent(searchTerm)}`;
-            }
+        searchButton.addEventListener('click', performSearch);
+    }
+    if (searchInput) {
+        searchInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') performSearch();
         });
+    }
+
+    // Scroll-triggered animations
+    const animatedNodes = document.querySelectorAll('[data-animate]');
+    if (animatedNodes.length) {
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('in-view');
+                    io.unobserve(entry.target);
+                }
+            });
+        }, { root: null, rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+
+        animatedNodes.forEach((el) => io.observe(el));
     }
 });

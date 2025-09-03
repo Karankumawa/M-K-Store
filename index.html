@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>M.K. Store</title>
+    <title>M.K. Store — Daily Essentials & Groceries</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Shop daily essentials, groceries, snacks, and more at M.K. Store. Quality products at great prices with a smooth shopping experience.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/cart.css">
@@ -37,7 +41,7 @@
     </header>
 
     <main>
-        <section class="hero-1">
+        <section class="hero-1" data-animate="fade-up">
             <div class="hero-content">
                 <h2>Welcome to Our MK Store</h2>
                 <p>Discover a wide range of products at amazing prices.</p>
@@ -45,11 +49,11 @@
             </div>
         </section>
 
-        <section class="featured-products">
+        <section class="featured-products" data-animate="fade-up">
             <h2>Your Daily Items</h2>
             <div class="product-grid">
                 <!-- Product 1 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/sail,suger&jaggery.webp" alt="Sail Sugar">
                     <h3>Sail Sugar</h3>
                     <span class="price">$1</span>
@@ -59,7 +63,7 @@
                     </button>
                 </div>
                 <!-- Product 2 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/atta.webp" alt="Atta & Flour">
                     <h3>Atta & Flour</h3>
                     <span class="price">$2</span>
@@ -69,7 +73,7 @@
                     </button>
                 </div>
                 <!-- Product 3 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/rice & rice product.webp" alt="Rice & Rice Products">
                     <h3>Rice & Rice Products</h3>
                     <span class="price">$3</span>
@@ -79,7 +83,7 @@
                     </button>
                 </div>
                 <!-- Product 4 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/Dals & Pulses.webp" alt="Dals & Pulses">
                     <h3>Dals & Pulses</h3>
                     <span class="price">$5</span>
@@ -91,11 +95,11 @@
             </div>
         </section>
 
-        <section class="featured-products">
+        <section class="featured-products" data-animate="fade-up">
             <h2>Snacks Store</h2>
             <div class="product-grid">
                 <!-- Product 1 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/Morning Starters.webp" alt="Morning Starters">
                     <h3>Morning Starters</h3>
                     <span class="price">$1</span>
@@ -105,7 +109,7 @@
                     </button>
                 </div>
                 <!-- Product 2 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/Chai Snacks.webp" alt="Chai Snacks">
                     <h3>Chai Snacks</h3>
                     <span class="price">$2</span>
@@ -115,7 +119,7 @@
                     </button>
                 </div>
                 <!-- Product 3 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/Sweets.webp" alt="Sweets">
                     <h3>Sweets</h3>
                     <span class="price">$3</span>
@@ -125,7 +129,7 @@
                     </button>
                 </div>
                 <!-- Product 4 -->
-                <div class="product">
+                <div class="product" data-animate="zoom-in">
                     <img src="assests/Pasta & More.webp" alt="Pasta & More">
                     <h3>Pasta & More</h3>
                     <span class="price">$4</span>
@@ -137,7 +141,8 @@
             </div>
         </section>
 
-        <section class="hero-child">
+
+        <section class="hero-child" data-animate="fade-up">
             <div class="hero-content">
                 <h2>Special Offers</h2>
                 <p>Check out our latest deals and discounts.</p>
@@ -146,7 +151,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer data-animate="fade-up">
         <div class="footer-content">
             <div class="footer-section">
                 <h3>About Us</h3>
@@ -167,16 +172,20 @@
                 <p>Email: info@mkstore.com</p>
                 <p>Phone: +1 234 567 890</p>
                 <p>Address: 123 Store Street, City, Country</p>
+                <div class="socials">
+                    <a href="#" aria-label="Instagram"><i class="fa fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa fa-facebook"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa fa-twitter"></i></a>
+                </div>
             </div>
         </div>
         <div class="footer-bottom">
             <p>&copy; 2024 M.K. Store. All rights reserved.</p>
-            <p>Contact: 63...</p>
-            <p>Name: Karan Kumawat</p>
+            <p>Built with love by Karan Kumawat</p>
         </div>
     </footer>
 
     <script src="js/script.js"></script>
-    <script src="js/livehelp.js"></script>
+    
 </body>
 </html>
